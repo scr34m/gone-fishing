@@ -1,0 +1,448 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 44;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7D0A7FCE0CDC409A0077BC94 /* NSWindow+Transforms.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0A7FCD0CDC409A0077BC94 /* NSWindow+Transforms.m */; };
+		7D4A14FF0CD9BA8700C2464E /* Fishy.icns in Resources */ = {isa = PBXBuildFile; fileRef = 7D4A14FE0CD9BA8700C2464E /* Fishy.icns */; };
+		7D4A151F0CD9BD6100C2464E /* stop20.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D4A151C0CD9BD6100C2464E /* stop20.png */; };
+		7D4A15200CD9BD6100C2464E /* start20.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D4A151D0CD9BD6100C2464E /* start20.png */; };
+		7D4A154B0CD9C42400C2464E /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4A154A0CD9C42400C2464E /* Carbon.framework */; };
+		7D7255130CD94154002B2CEC /* Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7255110CD94154002B2CEC /* Controller.m */; };
+		7D72555F0CD948AD002B2CEC /* ColorOnScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7255580CD948AD002B2CEC /* ColorOnScreen.m */; };
+		7D7255600CD948AD002B2CEC /* GrabWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D72555A0CD948AD002B2CEC /* GrabWindow.m */; };
+		7D7255610CD948AD002B2CEC /* WindowExtras.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D72555C0CD948AD002B2CEC /* WindowExtras.m */; };
+		7D7255620CD948AD002B2CEC /* RoundedBezierPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D72555E0CD948AD002B2CEC /* RoundedBezierPath.m */; };
+		7D7255650CD948C8002B2CEC /* TransparentWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7255640CD948C8002B2CEC /* TransparentWindow.m */; };
+		7D7255680CD948DA002B2CEC /* PrettyError.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7255670CD948DA002B2CEC /* PrettyError.m */; };
+		7D72556A0CD948E8002B2CEC /* PrettyErrorWindow.nib in Resources */ = {isa = PBXBuildFile; fileRef = 7D7255690CD948E8002B2CEC /* PrettyErrorWindow.nib */; };
+		7D72556C0CD948ED002B2CEC /* CGKeyCodeMap.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7D72556B0CD948ED002B2CEC /* CGKeyCodeMap.plist */; };
+		7D72556F0CD94906002B2CEC /* FocusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D72556E0CD94906002B2CEC /* FocusView.m */; };
+		7D7255770CD949B5002B2CEC /* HUDWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7255740CD949B5002B2CEC /* HUDWindow.m */; };
+		7D7255780CD949B5002B2CEC /* CenteredTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7255760CD949B5002B2CEC /* CenteredTextFieldCell.m */; };
+		8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97318FDCFA39411CA2CEA /* MainMenu.nib */; };
+		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
+		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
+		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		7D4A176B0CDAA28F00C2464E /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
+		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		29B97319FDCFA39411CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
+		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		32CA4F630368D1EE00C91783 /* GoneFishing_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoneFishing_Prefix.pch; sourceTree = "<group>"; };
+		7D0A7FCC0CDC409A0077BC94 /* NSWindow+Transforms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSWindow+Transforms.h"; sourceTree = "<group>"; };
+		7D0A7FCD0CDC409A0077BC94 /* NSWindow+Transforms.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSWindow+Transforms.m"; sourceTree = "<group>"; };
+		7D4A14FE0CD9BA8700C2464E /* Fishy.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Fishy.icns; sourceTree = "<group>"; };
+		7D4A151A0CD9BD4800C2464E /* DeviateFish.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DeviateFish.png; sourceTree = "<group>"; };
+		7D4A151C0CD9BD6100C2464E /* stop20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stop20.png; sourceTree = "<group>"; };
+		7D4A151D0CD9BD6100C2464E /* start20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = start20.png; sourceTree = "<group>"; };
+		7D4A151E0CD9BD6100C2464E /* ColorMeter20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ColorMeter20.png; sourceTree = "<group>"; };
+		7D4A154A0CD9C42400C2464E /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
+		7D4A172B0CDA9F8C00C2464E /* AquaticPrime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AquaticPrime.h; sourceTree = "<group>"; };
+		7D7255110CD94154002B2CEC /* Controller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Controller.m; sourceTree = "<group>"; };
+		7D7255120CD94154002B2CEC /* Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Controller.h; sourceTree = "<group>"; };
+		7D7255560CD948A6002B2CEC /* CGSPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGSPrivate.h; sourceTree = "<group>"; };
+		7D7255570CD948AD002B2CEC /* ColorOnScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorOnScreen.h; sourceTree = "<group>"; };
+		7D7255580CD948AD002B2CEC /* ColorOnScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorOnScreen.m; sourceTree = "<group>"; };
+		7D7255590CD948AD002B2CEC /* GrabWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrabWindow.h; sourceTree = "<group>"; };
+		7D72555A0CD948AD002B2CEC /* GrabWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrabWindow.m; sourceTree = "<group>"; };
+		7D72555B0CD948AD002B2CEC /* WindowExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WindowExtras.h; sourceTree = "<group>"; };
+		7D72555C0CD948AD002B2CEC /* WindowExtras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WindowExtras.m; sourceTree = "<group>"; };
+		7D72555D0CD948AD002B2CEC /* RoundedBezierPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundedBezierPath.h; sourceTree = "<group>"; };
+		7D72555E0CD948AD002B2CEC /* RoundedBezierPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundedBezierPath.m; sourceTree = "<group>"; };
+		7D7255630CD948C8002B2CEC /* TransparentWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransparentWindow.h; sourceTree = "<group>"; };
+		7D7255640CD948C8002B2CEC /* TransparentWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransparentWindow.m; sourceTree = "<group>"; };
+		7D7255660CD948DA002B2CEC /* PrettyError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrettyError.h; sourceTree = "<group>"; };
+		7D7255670CD948DA002B2CEC /* PrettyError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrettyError.m; sourceTree = "<group>"; };
+		7D7255690CD948E8002B2CEC /* PrettyErrorWindow.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = PrettyErrorWindow.nib; sourceTree = "<group>"; };
+		7D72556B0CD948ED002B2CEC /* CGKeyCodeMap.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CGKeyCodeMap.plist; sourceTree = "<group>"; };
+		7D72556D0CD94906002B2CEC /* FocusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FocusView.h; sourceTree = "<group>"; };
+		7D72556E0CD94906002B2CEC /* FocusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FocusView.m; sourceTree = "<group>"; };
+		7D7255730CD949B5002B2CEC /* HUDWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HUDWindow.h; sourceTree = "<group>"; };
+		7D7255740CD949B5002B2CEC /* HUDWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HUDWindow.m; sourceTree = "<group>"; };
+		7D7255750CD949B5002B2CEC /* CenteredTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CenteredTextFieldCell.h; sourceTree = "<group>"; };
+		7D7255760CD949B5002B2CEC /* CenteredTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CenteredTextFieldCell.m; sourceTree = "<group>"; };
+		7DB9DE950DA7235C00A38016 /* Spell_Nature_TimeStop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Spell_Nature_TimeStop.png; sourceTree = "<group>"; };
+		7DB9DE960DA7235C00A38016 /* Ability_Creature_Poison_05.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Ability_Creature_Poison_05.png; sourceTree = "<group>"; };
+		7DB9DE970DA7235C00A38016 /* Bobber.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Bobber.png; sourceTree = "<group>"; };
+		7DB9DE980DA7235C00A38016 /* Ability_ShootWand.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Ability_ShootWand.png; sourceTree = "<group>"; };
+		7DB9DE990DA7235C00A38016 /* INV_Misc_Gear_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = INV_Misc_Gear_01.png; sourceTree = "<group>"; };
+		7DB9DEA00DA7240700A38016 /* Spell_Nature_StoneSkinTotem.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Spell_Nature_StoneSkinTotem.png; sourceTree = "<group>"; };
+		7DB9DEA20DA7243600A38016 /* Spell_Holy_MindVision.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Spell_Holy_MindVision.png; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8D1107320486CEB800E47090 /* GoneFishing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoneFishing.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D11072E0486CEB800E47090 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
+				7D4A154B0CD9C42400C2464E /* Carbon.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				7D7255120CD94154002B2CEC /* Controller.h */,
+				7D7255110CD94154002B2CEC /* Controller.m */,
+				7D7255B90CD94CA7002B2CEC /* Views & Cells */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7D4A154A0CD9C42400C2464E /* Carbon.framework */,
+				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
+			);
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
+				13E42FB307B3F0F600E4EEF1 /* CoreData.framework */,
+				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107320486CEB800E47090 /* GoneFishing.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* GoneFishing */ = {
+			isa = PBXGroup;
+			children = (
+				080E96DDFE201D6D7F000001 /* Classes */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				7D7255500CD94896002B2CEC /* Categories */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = GoneFishing;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				7D4A172B0CDA9F8C00C2464E /* AquaticPrime.h */,
+				32CA4F630368D1EE00C91783 /* GoneFishing_Prefix.pch */,
+				7D7255560CD948A6002B2CEC /* CGSPrivate.h */,
+				29B97316FDCFA39411CA2CEA /* main.m */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7D387F720CDFD04700ECFDCF /* Excluded from Copy */,
+				7D4A151C0CD9BD6100C2464E /* stop20.png */,
+				7D4A151D0CD9BD6100C2464E /* start20.png */,
+				7D4A14FE0CD9BA8700C2464E /* Fishy.icns */,
+				7DB9DE910DA7234E00A38016 /* Icons */,
+				7D72556B0CD948ED002B2CEC /* CGKeyCodeMap.plist */,
+				8D1107310486CEB800E47090 /* Info.plist */,
+				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
+				7D7255690CD948E8002B2CEC /* PrettyErrorWindow.nib */,
+				29B97318FDCFA39411CA2CEA /* MainMenu.nib */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
+				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7D387F720CDFD04700ECFDCF /* Excluded from Copy */ = {
+			isa = PBXGroup;
+			children = (
+				7D4A151E0CD9BD6100C2464E /* ColorMeter20.png */,
+				7D4A151A0CD9BD4800C2464E /* DeviateFish.png */,
+			);
+			name = "Excluded from Copy";
+			sourceTree = "<group>";
+		};
+		7D7255500CD94896002B2CEC /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				7D7255570CD948AD002B2CEC /* ColorOnScreen.h */,
+				7D7255580CD948AD002B2CEC /* ColorOnScreen.m */,
+				7D7255590CD948AD002B2CEC /* GrabWindow.h */,
+				7D72555A0CD948AD002B2CEC /* GrabWindow.m */,
+				7D72555B0CD948AD002B2CEC /* WindowExtras.h */,
+				7D72555C0CD948AD002B2CEC /* WindowExtras.m */,
+				7D0A7FCC0CDC409A0077BC94 /* NSWindow+Transforms.h */,
+				7D0A7FCD0CDC409A0077BC94 /* NSWindow+Transforms.m */,
+				7D72555D0CD948AD002B2CEC /* RoundedBezierPath.h */,
+				7D72555E0CD948AD002B2CEC /* RoundedBezierPath.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		7D7255B90CD94CA7002B2CEC /* Views & Cells */ = {
+			isa = PBXGroup;
+			children = (
+				7D72556D0CD94906002B2CEC /* FocusView.h */,
+				7D72556E0CD94906002B2CEC /* FocusView.m */,
+				7D7255660CD948DA002B2CEC /* PrettyError.h */,
+				7D7255670CD948DA002B2CEC /* PrettyError.m */,
+				7D7255630CD948C8002B2CEC /* TransparentWindow.h */,
+				7D7255640CD948C8002B2CEC /* TransparentWindow.m */,
+				7D7255730CD949B5002B2CEC /* HUDWindow.h */,
+				7D7255740CD949B5002B2CEC /* HUDWindow.m */,
+				7D7255750CD949B5002B2CEC /* CenteredTextFieldCell.h */,
+				7D7255760CD949B5002B2CEC /* CenteredTextFieldCell.m */,
+			);
+			name = "Views & Cells";
+			sourceTree = "<group>";
+		};
+		7DB9DE910DA7234E00A38016 /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				7DB9DE950DA7235C00A38016 /* Spell_Nature_TimeStop.png */,
+				7DB9DE960DA7235C00A38016 /* Ability_Creature_Poison_05.png */,
+				7DB9DE970DA7235C00A38016 /* Bobber.png */,
+				7DB9DE980DA7235C00A38016 /* Ability_ShootWand.png */,
+				7DB9DE990DA7235C00A38016 /* INV_Misc_Gear_01.png */,
+				7DB9DEA20DA7243600A38016 /* Spell_Holy_MindVision.png */,
+				7DB9DEA00DA7240700A38016 /* Spell_Nature_StoneSkinTotem.png */,
+			);
+			name = Icons;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8D1107260486CEB800E47090 /* GoneFishing */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "GoneFishing" */;
+			buildPhases = (
+				8D1107290486CEB800E47090 /* Resources */,
+				8D11072C0486CEB800E47090 /* Sources */,
+				8D11072E0486CEB800E47090 /* Frameworks */,
+				7D4A176B0CDAA28F00C2464E /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GoneFishing;
+			productInstallPath = "$(HOME)/Applications";
+			productName = GoneFishing;
+			productReference = 8D1107320486CEB800E47090 /* GoneFishing.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "GoneFishing" */;
+			compatibilityVersion = "Xcode 3.0";
+			hasScannedForEncodings = 1;
+			mainGroup = 29B97314FDCFA39411CA2CEA /* GoneFishing */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8D1107260486CEB800E47090 /* GoneFishing */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D1107290486CEB800E47090 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */,
+				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
+				7D72556A0CD948E8002B2CEC /* PrettyErrorWindow.nib in Resources */,
+				7D72556C0CD948ED002B2CEC /* CGKeyCodeMap.plist in Resources */,
+				7D4A14FF0CD9BA8700C2464E /* Fishy.icns in Resources */,
+				7D4A151F0CD9BD6100C2464E /* stop20.png in Resources */,
+				7D4A15200CD9BD6100C2464E /* start20.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D11072C0486CEB800E47090 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D11072D0486CEB800E47090 /* main.m in Sources */,
+				7D7255130CD94154002B2CEC /* Controller.m in Sources */,
+				7D72555F0CD948AD002B2CEC /* ColorOnScreen.m in Sources */,
+				7D7255600CD948AD002B2CEC /* GrabWindow.m in Sources */,
+				7D7255610CD948AD002B2CEC /* WindowExtras.m in Sources */,
+				7D7255620CD948AD002B2CEC /* RoundedBezierPath.m in Sources */,
+				7D7255650CD948C8002B2CEC /* TransparentWindow.m in Sources */,
+				7D7255680CD948DA002B2CEC /* PrettyError.m in Sources */,
+				7D72556F0CD94906002B2CEC /* FocusView.m in Sources */,
+				7D7255770CD949B5002B2CEC /* HUDWindow.m in Sources */,
+				7D7255780CD949B5002B2CEC /* CenteredTextFieldCell.m in Sources */,
+				7D0A7FCE0CDC409A0077BC94 /* NSWindow+Transforms.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		089C165CFE840E0CC02AAC07 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				089C165DFE840E0CC02AAC07 /* English */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		29B97318FDCFA39411CA2CEA /* MainMenu.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				29B97319FDCFA39411CA2CEA /* English */,
+			);
+			name = MainMenu.nib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C01FCF4B08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"/Volumes/AquaticPrime 1.0.6/AquaticPrime/AquaticPrime\"",
+					"\"$(SRCROOT)\"",
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = GoneFishing_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				PRODUCT_NAME = GoneFishing;
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		C01FCF4C08A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"/Volumes/AquaticPrime 1.0.6/AquaticPrime/AquaticPrime\"",
+					"\"$(SRCROOT)\"",
+				);
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = GoneFishing_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				PRODUCT_NAME = GoneFishing;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_PROFILING_CODE = NO;
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				PREBINDING = NO;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
+				STRIP_INSTALLED_PRODUCT = NO;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				PREBINDING = NO;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "GoneFishing" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4B08A954540054247B /* Debug */,
+				C01FCF4C08A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "GoneFishing" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}

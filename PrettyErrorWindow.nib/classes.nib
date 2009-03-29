@@ -1,0 +1,15 @@
+{
+    IBClasses = (
+        {CLASS = BorderlessWindow; LANGUAGE = ObjC; SUPERCLASS = NSWindow; }, 
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {CLASS = HUDWindow; LANGUAGE = ObjC; SUPERCLASS = TransparentWindow; }, 
+        {
+            CLASS = PrettyError; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {errorText = id; errorWindow = id; }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {CLASS = TransparentWindow; LANGUAGE = ObjC; SUPERCLASS = BorderlessWindow; }
+    ); 
+    IBVersion = 1; 
+}
