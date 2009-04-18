@@ -227,6 +227,17 @@
     return [[[NSUserDefaults standardUserDefaults] objectForKey: @"bobberOffsetY"] floatValue];
 }
 
+- (float)whiteThreshold {
+	switch([[[NSUserDefaults standardUserDefaults] objectForKey: @"bobberCatchSensitivity"] intValue]) {
+		case 1:	return 0.91;
+		case 2:	return 0.85;
+		default:
+		case 3:	return 0.75;
+		case 4:	return 0.65;
+		case 5:	return 0.50;
+	}
+}
+
 - (float)bobberCatchSensitivity {
     int num = [[[NSUserDefaults standardUserDefaults] objectForKey: @"bobberCatchSensitivity"] intValue];
     
@@ -826,169 +837,168 @@ BOOL _updateDockIcon = YES;
     //NSDate *start = [NSDate date];
 	if([self shouldPause]) return;
     
-	NS_DURING;
-    BOOL wowIsFront		= [self isWoWFront];
-    BOOL allowFishInBG	= [self allowFishingInBackground];
-    // [overlayWindow setIsVisible: wowIsFront];
-    if(!wowIsFront && !allowFishInBG)	return;
-    
-    // are we fishing in the background?
-    BOOL fishInBG = (!wowIsFront && allowFishInBG) ? YES : NO; //[bobberFishInBG state] ? YES : NO;
-    
-    // get number of color matches on the bobber and WoW's WindowID
-    int count	  = [[[timer userInfo] objectForKey: @"Count"] intValue];
-    int windowID  = [[[timer userInfo] objectForKey: @"WindowID"] intValue];
-    
-    // get our bobber position
-    NSPoint screenPt = [[[timer userInfo] objectForKey: @"ScreenPoint"] pointValue];
-    NSPoint windowPt = [[[timer userInfo] objectForKey: @"WindowPoint"] pointValue];
-    NSPoint thePoint = fishInBG ? windowPt : screenPt;
-    
-    // determine our bobber scan rect
-    NSRect bobberArea = NSZeroRect; bobberArea.origin = thePoint;
-    if(!fishInBG) bobberArea.origin.y = [[overlayWindow screen] frame].size.height - bobberArea.origin.y;
-    float radius = [self bobberRadius]*-1.0;
-    bobberArea = NSInsetRect(bobberArea, radius, radius);
-    
-    // fishing in background              ?         use CoreGraphics to get the window (medium speed)           :              use QuickDraw (fast)
-    //NSBitmapImageRep *bmBobber = fishInBG ? [NSBitmapImageRep bitmapRepWithRect: bobberArea inWindow: windowID] : [NSBitmapImageRep bitmapRepWithScreenShotInRect: bobberArea];
-    NSImage *wow = fishInBG ? [NSImage imageWithBitmapRep: [NSBitmapImageRep bitmapRepWithRect: bobberArea inWindow: windowID]] : [NSImage imageWithScreenShotInRect: bobberArea];
-    if(!wow) return;
-    
-    // alternate updating the dock icon
-    if(_updateDockIcon) {
-        [NSApp setApplicationIconImage: wow];
-        _updateDockIcon = NO;
-    } else {
-        _updateDockIcon = YES;
-    }
-    
-    // scan the image for a splash
-    int hits = 0, x, y;
-    int imgWidth = [wow size].width, imgHeight = [wow size].height;
-    /*
-    unsigned char *data = [bmBobber bitmapData];
-    int imgWidth = [bmBobber pixelsWide], imgHeight = [bmBobber pixelsHigh];
-    int samplesPerPixel = [bmBobber samplesPerPixel], bytesPerRow = imgWidth * samplesPerPixel;
-    BOOL isARGB = ([bmBobber bitmapFormat] & NSAlphaFirstBitmapFormat) ? YES : NO;
-    int red = isARGB ? 1 : 0, green = isARGB ? 2 : 1, blue = isARGB ? 3 : 2; */
-    
-    [wow lockFocus];
-    for (x=0; x<imgWidth; x++) {
-        //unsigned char *pixel = data + bytesPerRow*x;
-        for (y=0; y<imgHeight; y++) {
-            NSColor *color = NSReadPixel(NSMakePoint(x, y));
-            
-            if(([color redComponent]   > 0.91) &&
-               ([color greenComponent] > 0.91) &&
-               ([color blueComponent]  > 0.91) ) {
-                hits++;
-                //if(hits > 2)	goto done;
-            }
-           //  pixel += samplesPerPixel;
-        }
-    }
-    [wow unlockFocus];
-    //NSLog(@"Splash scanc took %f seconds", [start timeIntervalSinceNow]*-1.0);
-    
-done:;
-    if(hits)
-        ; //NSLog(@"FOUND WHITE COLOR: %d count, %d hits", count, hits);
-    
-    BOOL enoughWhite = NO;
-    //if( !(hits < (count/12.0)) ) {// ie, hits >= count/9.0
-    //    enoughWhite = YES;
-    //    NSLog(@"hits >= %.2f", (count/12.0));
-    //}
-    if(hits >= count * [self bobberCatchSensitivity]) {
-        enoughWhite = YES;
-        //NSLog(@"hits >= %.2f with %.3f", count * [self bobberCatchSensitivity], [self bobberCatchSensitivity]);
-    }
-    
-    if(enoughWhite) {
-        // update dock image if we haven't already
-        if(_updateDockIcon) {
-            [NSApp setApplicationIconImage: wow];
-            // [NSApp setApplicationIconImage: [NSImage imageWithBitmapRep: [NSBitmapImageRep correctBitmap: bmBobber]]];
-        }
-    
-        // stop the splash timer
-        [_findSplashTimer invalidate];	_findSplashTimer = nil;
-        [NSObject cancelPreviousPerformRequestsWithTarget: self selector: @selector(startFishing:) object: nil];
-        
-        // create a CGPoint to click
-        float screenHeight = [[overlayWindow screen] frame].size.height;
-        CGPoint clickPt = CGPointMake(screenPt.x, screenHeight - screenPt.y);
-        
-        // get ahold of the previous mouse position
-        NSPoint nsPreviousPt = [NSEvent mouseLocation];
-        nsPreviousPt.y = screenHeight - nsPreviousPt.y;
-        CGPoint previousPt = CGPointMake(nsPreviousPt.x, nsPreviousPt.y);
-        
-        CGInhibitLocalEvents(TRUE);
-        // activate WoW if it isn't already
-        [self saveFrontProcess];
-        [self activateWoW];
-        
-        usleep(500000);
-        
-        NS_DURING
-        
-        // post a mouse up event to move the mouse into location
-        CGPostMouseEvent(previousPt, FALSE, 2, FALSE, FALSE);
-        
-        // create event source
-        if(!_eventSource) _eventSource = CGEventSourceCreate(kCGEventSourceStatePrivate);
-        
-        // configure the various events
-        CGEventRef moveToBobber = CGEventCreateMouseEvent(_eventSource, kCGEventMouseMoved, clickPt, kCGMouseButtonLeft);
-        CGEventRef moveToPrevPt = CGEventCreateMouseEvent(_eventSource, kCGEventMouseMoved, previousPt, kCGMouseButtonLeft);
-        CGEventRef rightClickDn = CGEventCreateMouseEvent(_eventSource, kCGEventRightMouseDown, clickPt, kCGMouseButtonRight);
-        CGEventRef rightClickUp = CGEventCreateMouseEvent(_eventSource, kCGEventRightMouseUp, clickPt, kCGMouseButtonRight);
-        
-        // bug in Tiger... event type isn't set in the Create method
-        CGEventSetType(rightClickDn, kCGEventRightMouseDown);
-        CGEventSetType(rightClickUp, kCGEventRightMouseUp);
-        CGEventSetType(moveToBobber, kCGEventMouseMoved);
-        CGEventSetType(moveToPrevPt, kCGEventMouseMoved);
-        
-        // post the mouse events
-        CGEventPostToPSN(&_wowProcess, moveToBobber);
-        usleep(100000);	// wait 0.1 sec
-        CGEventPostToPSN(&_wowProcess, rightClickDn);
-        CGEventPostToPSN(&_wowProcess, rightClickUp);
-        usleep(100000); // wait 0.1 sec
-        CGEventPostToPSN(&_wowProcess, moveToPrevPt);
-        
-        // release events
-        if(rightClickDn)    CFRelease(rightClickDn); 
-        if(rightClickUp)    CFRelease(rightClickUp); 
-        if(moveToBobber)    CFRelease(moveToBobber);
-        if(moveToPrevPt)    CFRelease(moveToPrevPt);
-        
-        /*
-         // old way I did it (works fine though)
-         CGDisplayMoveCursorToPoint(kCGDirectMainDisplay, clickPt);
-         
-         CGPostMouseEvent(clickPt, TRUE, 2, FALSE, TRUE);
-         CGPostMouseEvent(clickPt, FALSE, 2, FALSE, FALSE);
-         
-         // move the mosue back to where it came from
-         CGPostMouseEvent(previousPt, TRUE, 1, FALSE);
-         */
-        
-        NS_HANDLER
-        CGInhibitLocalEvents(FALSE);
-        NS_ENDHANDLER
-        
-        // restore state
-        [self restoreFrontProcess];
-        CGInhibitLocalEvents(FALSE);
-        
-        // start fishing again!
-        [self performSelector: @selector(startFishing:) withObject: nil afterDelay: SSRandomIntBetween(2.0, 4.0)];
-    }
-    NS_HANDLER;
+	NS_DURING {
+		BOOL wowIsFront		= [self isWoWFront];
+		BOOL allowFishInBG	= [self allowFishingInBackground];
+		// [overlayWindow setIsVisible: wowIsFront];
+		if(!wowIsFront && !allowFishInBG)	return;
+		
+		// are we fishing in the background?
+		BOOL fishInBG = (!wowIsFront && allowFishInBG) ? YES : NO; //[bobberFishInBG state] ? YES : NO;
+		
+		// get number of color matches on the bobber and WoW's WindowID
+		int count	  = [[[timer userInfo] objectForKey: @"Count"] intValue];
+		int windowID  = [[[timer userInfo] objectForKey: @"WindowID"] intValue];
+		
+		// get our bobber position
+		NSPoint screenPt = [[[timer userInfo] objectForKey: @"ScreenPoint"] pointValue];
+		NSPoint windowPt = [[[timer userInfo] objectForKey: @"WindowPoint"] pointValue];
+		NSPoint thePoint = fishInBG ? windowPt : screenPt;
+		
+		// determine our bobber scan rect
+		NSRect bobberArea = NSZeroRect; bobberArea.origin = thePoint;
+		if(!fishInBG) bobberArea.origin.y = [[overlayWindow screen] frame].size.height - bobberArea.origin.y;
+		float radius = [self bobberRadius]*-1.0;
+		bobberArea = NSInsetRect(bobberArea, radius, radius);
+		
+		// fishing in background              ?         use CoreGraphics to get the window (medium speed)           :              use QuickDraw (fast)
+		//NSBitmapImageRep *bmBobber = fishInBG ? [NSBitmapImageRep bitmapRepWithRect: bobberArea inWindow: windowID] : [NSBitmapImageRep bitmapRepWithScreenShotInRect: bobberArea];
+		NSImage *wow = fishInBG ? [NSImage imageWithBitmapRep: [NSBitmapImageRep bitmapRepWithRect: bobberArea inWindow: windowID]] : [NSImage imageWithScreenShotInRect: bobberArea];
+		if(!wow) return;
+		
+		// alternate updating the dock icon
+		if(_updateDockIcon) {
+			[NSApp setApplicationIconImage: wow];
+			_updateDockIcon = NO;
+		} else {
+			_updateDockIcon = YES;
+		}
+		
+		// scan the image for a splash
+		int hits = 0, x, y;
+		int imgWidth = [wow size].width, imgHeight = [wow size].height;
+		/*
+		 unsigned char *data = [bmBobber bitmapData];
+		 int imgWidth = [bmBobber pixelsWide], imgHeight = [bmBobber pixelsHigh];
+		 int samplesPerPixel = [bmBobber samplesPerPixel], bytesPerRow = imgWidth * samplesPerPixel;
+		 BOOL isARGB = ([bmBobber bitmapFormat] & NSAlphaFirstBitmapFormat) ? YES : NO;
+		 int red = isARGB ? 1 : 0, green = isARGB ? 2 : 1, blue = isARGB ? 3 : 2; */
+		
+		float whiteThreshold = [self whiteThreshold];
+		
+		[wow lockFocus];
+		for (x=0; x<imgWidth; x++) {
+			//unsigned char *pixel = data + bytesPerRow*x;
+			for (y=0; y<imgHeight; y++) {
+				NSColor *color = NSReadPixel(NSMakePoint(x, y));
+				
+				if(([color redComponent]   > whiteThreshold) &&
+				   ([color greenComponent] > whiteThreshold) &&
+				   ([color blueComponent]  > whiteThreshold) ) {
+					hits++;
+					//if(hits > 2)	goto done;
+				}
+				//  pixel += samplesPerPixel;
+			}
+		}
+		[wow unlockFocus];
+		//NSLog(@"Splash scanc took %f seconds", [start timeIntervalSinceNow]*-1.0);
+		
+	done:;
+		if(hits)
+			; //NSLog(@"FOUND WHITE COLOR: %d count, %d hits", count, hits);
+		
+		BOOL enoughWhite = NO;
+		// if(hits) NSLog(@"%d hits; %d count... %.2f", hits, count, count * [self bobberCatchSensitivity]);
+		if(hits >= count * [self bobberCatchSensitivity]) {
+			enoughWhite = YES;
+			//NSLog(@"hits >= %.2f with %.3f", count * [self bobberCatchSensitivity], [self bobberCatchSensitivity]);
+		}
+		
+		if(enoughWhite) {
+			// update dock image if we haven't already
+			if(_updateDockIcon) {
+				[NSApp setApplicationIconImage: wow];
+				// [NSApp setApplicationIconImage: [NSImage imageWithBitmapRep: [NSBitmapImageRep correctBitmap: bmBobber]]];
+			}
+			
+			// stop the splash timer
+			[_findSplashTimer invalidate];	_findSplashTimer = nil;
+			[NSObject cancelPreviousPerformRequestsWithTarget: self selector: @selector(startFishing:) object: nil];
+			
+			// create a CGPoint to click
+			float screenHeight = [[overlayWindow screen] frame].size.height;
+			CGPoint clickPt = CGPointMake(screenPt.x, screenHeight - screenPt.y);
+			
+			// get ahold of the previous mouse position
+			NSPoint nsPreviousPt = [NSEvent mouseLocation];
+			nsPreviousPt.y = screenHeight - nsPreviousPt.y;
+			CGPoint previousPt = CGPointMake(nsPreviousPt.x, nsPreviousPt.y);
+			
+			CGInhibitLocalEvents(TRUE);
+			// activate WoW if it isn't already
+			[self saveFrontProcess];
+			[self activateWoW];
+			
+			usleep(500000);
+			
+			NS_DURING {
+				
+				// post a mouse up event to move the mouse into location
+				CGPostMouseEvent(previousPt, FALSE, 2, FALSE, FALSE);
+				
+				// create event source
+				if(!_eventSource) _eventSource = CGEventSourceCreate(kCGEventSourceStatePrivate);
+				
+				// configure the various events
+				CGEventRef moveToBobber = CGEventCreateMouseEvent(_eventSource, kCGEventMouseMoved, clickPt, kCGMouseButtonLeft);
+				CGEventRef moveToPrevPt = CGEventCreateMouseEvent(_eventSource, kCGEventMouseMoved, previousPt, kCGMouseButtonLeft);
+				CGEventRef rightClickDn = CGEventCreateMouseEvent(_eventSource, kCGEventRightMouseDown, clickPt, kCGMouseButtonRight);
+				CGEventRef rightClickUp = CGEventCreateMouseEvent(_eventSource, kCGEventRightMouseUp, clickPt, kCGMouseButtonRight);
+				
+				// bug in Tiger... event type isn't set in the Create method
+				CGEventSetType(rightClickDn, kCGEventRightMouseDown);
+				CGEventSetType(rightClickUp, kCGEventRightMouseUp);
+				CGEventSetType(moveToBobber, kCGEventMouseMoved);
+				CGEventSetType(moveToPrevPt, kCGEventMouseMoved);
+				
+				// post the mouse events
+				CGEventPostToPSN(&_wowProcess, moveToBobber);
+				usleep(100000);	// wait 0.1 sec
+				CGEventPostToPSN(&_wowProcess, rightClickDn);
+				CGEventPostToPSN(&_wowProcess, rightClickUp);
+				usleep(100000); // wait 0.1 sec
+				CGEventPostToPSN(&_wowProcess, moveToPrevPt);
+				
+				// release events
+				if(rightClickDn)    CFRelease(rightClickDn); 
+				if(rightClickUp)    CFRelease(rightClickUp); 
+				if(moveToBobber)    CFRelease(moveToBobber);
+				if(moveToPrevPt)    CFRelease(moveToPrevPt);
+				
+				/*
+				 // old way I did it (works fine though)
+				 CGDisplayMoveCursorToPoint(kCGDirectMainDisplay, clickPt);
+				 
+				 CGPostMouseEvent(clickPt, TRUE, 2, FALSE, TRUE);
+				 CGPostMouseEvent(clickPt, FALSE, 2, FALSE, FALSE);
+				 
+				 // move the mosue back to where it came from
+				 CGPostMouseEvent(previousPt, TRUE, 1, FALSE);
+				 */
+				
+			} NS_HANDLER {
+				CGInhibitLocalEvents(FALSE);
+			} NS_ENDHANDLER
+			
+			// restore state
+			[self restoreFrontProcess];
+			CGInhibitLocalEvents(FALSE);
+			
+			// start fishing again!
+			[self performSelector: @selector(startFishing:) withObject: nil afterDelay: SSRandomIntBetween(2.0, 4.0)];
+		}
+    } NS_HANDLER;
     NS_ENDHANDLER
 }
 
