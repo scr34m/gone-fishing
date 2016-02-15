@@ -220,36 +220,11 @@ CFArrayRef windowIDsArray = NULL;
 }
 
 + (NSImage *)imageWithScreenShotInRect:(NSRect)cocoaRect {
-	PicHandle picHandle;
-	GDHandle mainDevice;
-	Rect rect;
-	
-	// Convert NSRect to Rect
-	SetRect(&rect, NSMinX(cocoaRect), NSMinY(cocoaRect), NSMaxX(cocoaRect), NSMaxY(cocoaRect));
-	
-	// Get the main screen. No multiple screen support here.
-	mainDevice = GetMainDevice();
-	
 	// Capture the screen into the PicHandle.
-	picHandle = OpenPicture(&rect);
-	CopyBits((BitMap *)*(**mainDevice).gdPMap, (BitMap *)*(**mainDevice).gdPMap,
-				&rect, &rect, srcCopy, 0l);
-	ClosePicture();
-	
-	// Convert the PicHandle into an NSImage
-	// First lock the PicHandle so it doesn't move in memory while we copy
-	HLock((Handle)picHandle);
-	
-	NSImageRep *pictImageRep = [NSPICTImageRep imageRepWithData:[NSData dataWithBytes:(*picHandle)
-					length:GetHandleSize((Handle)picHandle)]];
-	HUnlock((Handle)picHandle);
-	
-	// We can release the PicHandle now that we're done with it
-	KillPicture(picHandle);
-	
-	// Create an image with the PICT representation
-	NSImage *image = [[NSImage alloc] initWithSize: [pictImageRep size]];
-	[image addRepresentation: pictImageRep];
+    CGImageRef picHandle = CGDisplayCreateImage(kCGDirectMainDisplay);
+    CGImageRef croppedImage = CGImageCreateWithImageInRect(picHandle, NSRectToCGRect(cocoaRect));
+    NSImage* image = [[NSImage alloc] initWithCGImage:croppedImage size:cocoaRect.size];
+    CFRelease(picHandle);
     return [image autorelease];
 }
 

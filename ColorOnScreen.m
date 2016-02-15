@@ -20,8 +20,16 @@
 	newPoint.y = [[NSScreen mainScreen] frame].size.height - point.y;
 	
 	// Here's where the magic happens. This grabs the color of the screen at a specific point
-	GetCPixel(newPoint.x, newPoint.y, &color);
-	
+    CGImageRef image = CGDisplayCreateImageForRect(CGMainDisplayID(), CGRectMake(newPoint.x, newPoint.y, 1, 1));
+    NSBitmapImageRep *bitmap = [[NSBitmapImageRep alloc] initWithCGImage:image];
+    CGImageRelease(image);
+    NSColor *ncolor = [bitmap colorAtX:0 y:0];
+    [bitmap release];
+    
+    color.red = [ncolor redComponent];
+    color.green = [ncolor greenComponent];
+    color.blue = [ncolor blueComponent];
+    
 	return [self colorFromRGBColor:color];
 }
 
