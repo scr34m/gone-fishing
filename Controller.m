@@ -1020,16 +1020,6 @@ BOOL _updateDockIcon = YES;
     
 }
 
-- (IBAction)registerProduct:(id)sender {
-    if(self.isRegistered)   [registrationText setStringValue: @"Thanks for registering! GoneFishing is registered to:"];
-    else                    [registrationText setStringValue: @"GoneFishing is not registered."];
-
-    if([registerWindow respondsToSelector: @selector(setCollectionBehavior:)])
-        [registerWindow setCollectionBehavior: NSWindowCollectionBehaviorMoveToActiveSpace];
-    [registerWindow makeKeyAndOrderFront: nil];
-    [registerWindow center];
-}
-
 - (IBAction)setFishingModifier:(id)sender {
     //[[NSUserDefaults standardUserDefaults] setObject: [NSNumber numberWithBool: [sender isSelectedForSegment: 0]] forKey: @"fishingModifierOption"];
     //[[NSUserDefaults standardUserDefaults] setObject: [NSNumber numberWithBool: [sender isSelectedForSegment: 1]] forKey: @"fishingModifierControl"];

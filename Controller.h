@@ -23,7 +23,6 @@
     IBOutlet id lureModifierSegment;
     IBOutlet id poleModifierSegment;
     IBOutlet NSImageView *imageWell;
-    IBOutlet id registrationText;
     
     @private;
 	BOOL					needsToApplyLure;
